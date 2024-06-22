@@ -96,6 +96,7 @@ export default function RouteInput({
               onPlaceChanged={() => handleWaypointSelect(stopPointRefs.current)}
               onLoad={(autocomplete) => (stopPointRefs.current = autocomplete)}
               font={faCircle}
+              Value={stopPointRef}
               fontColor="gray"
               onChange={() => {}}
             />

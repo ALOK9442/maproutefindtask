@@ -54,8 +54,9 @@ const Map = ({
     >
       <GoogleMap
         mapContainerStyle={{ height: "100%", width: "100%" }}
-        center={{ lat: 28.7041, lng: 77.5025 }}
+        center={{ lat: 25.3176, lng: 82.9739 }}
         zoom={13}
+        key={mapKey}
       >
         {origin && destination && fetchDirections && (
           <DirectionsService

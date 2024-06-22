@@ -6,7 +6,7 @@ export default function InputBox({
   label,
   name,
   placeholder,
-  value,
+  Value,
   onChange,
   onLoad,
   onPlaceChanged,
@@ -26,8 +26,8 @@ export default function InputBox({
           type="text"
           name={name}
           id={name}
+          ref={Value}
           placeholder={placeholder}
-          value={value}
           onChange={onChange}
           className="mt-1 p-2 pl-9 border rounded-md border-gray-300 w-full"
         />

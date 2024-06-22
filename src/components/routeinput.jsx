@@ -174,7 +174,7 @@ export default function RouteInput({
               onClick={() => handleModeChange("WALKING")}
               className={`flex h-fit items-center md:px-3 p-2 md:py-3 rounded-full ${
                 selectedMode === "WALKING"
-                  ? "bg-blue-600 duration-300 text-white duration-500 "
+                  ? "bg-blue-600 duration-300 text-white "
                   : "bg-gray-200 text-gray-800"
               }`}
             >

@@ -1,7 +1,10 @@
 import {
+  faBicycle,
+  faCab,
   faCircle,
   faDeleteLeft,
   faPlus,
+  faWalking,
 } from "@fortawesome/free-solid-svg-icons";
 import InputBox from "./common/inputbox";
 import { useRef, useState } from "react";
@@ -11,6 +14,7 @@ import DistanceDisplay from "./common/distanceDisplay";
 export default function RouteInput({
   setOrigin,
   setDestination,
+  setTravelMode,
   stopPoints,
   setStopPoints,
   handleSearch,
@@ -20,6 +24,7 @@ export default function RouteInput({
   routeNameDisplay,
 }) {
   const [stopPointInput, setStopPointInput] = useState("");
+  const [selectedMode, setSelectedMode] = useState("DRIVING");
   const originRef = useRef(null);
   const destinationRef = useRef(null);
   const stopPointRefs = useRef(null);
@@ -58,6 +63,7 @@ export default function RouteInput({
 
   const handleModeChange = (mode) => {
     setSelectedMode(mode);
+    setTravelMode(mode);
   };
 
   return (
@@ -73,7 +79,7 @@ export default function RouteInput({
               onPlaceChanged={() => handleOriginSelect(originRef.current)}
               onLoad={(autocomplete) => (originRef.current = autocomplete)}
               font={faCircle}
-              fontColor="green"
+              fontColor="blue"
               onChange={() => {}}
             />
           </div>
@@ -85,7 +91,7 @@ export default function RouteInput({
               onPlaceChanged={() => handleWaypointSelect(stopPointRefs.current)}
               onLoad={(autocomplete) => (stopPointRefs.current = autocomplete)}
               font={faCircle}
-              fontColor="blue"
+              fontColor="gray"
               onChange={() => {}}
             />
             <div
@@ -130,7 +136,48 @@ export default function RouteInput({
             />
           </div>
         </div>
-        <div className="flex sm:h-96 h-full sm:my-auto sm:mx-auto my-4 w-full">
+        <div className="flex flex-col justify-center items-center mt-1 md:w-1/2">
+          <div className="md:w-2/3 w-full border-2 space-x-1 bg-white p-2 shadow-xl rounded-xl h-fit flex justify-around mb-4">
+            <button
+              onClick={() => handleModeChange("DRIVING")}
+              className={`flex h-fit items-center md:px-3 p-2 md:py-3 rounded-full ${
+                selectedMode === "DRIVING"
+                  ? "bg-blue-600 text-white ring-2 duration-500 ring-blue-200"
+                  : "bg-gray-200 text-gray-800"
+              }`}
+            >
+              <FontAwesomeIcon
+                icon={faCab}
+                className=" xl:text-2xl lg:text-lg text-sm"
+              />
+            </button>
+            <button
+              onClick={() => handleModeChange("TWO_WHEELER")}
+              className={`flex h-fit items-center md:px-3 p-2 md:py-3 rounded-full ${
+                selectedMode === "TWO_WHEELER"
+                  ? "bg-blue-600 text-white ring-2 duration-500 ring-blue-200"
+                  : "bg-gray-200 text-gray-800"
+              }`}
+            >
+              <FontAwesomeIcon
+                icon={faBicycle}
+                className=" xl:text-2xl lg:text-lg text-sm"
+              />
+            </button>
+            <button
+              onClick={() => handleModeChange("WALKING")}
+              className={`flex h-fit items-center md:px-3 p-2 md:py-3 rounded-full ${
+                selectedMode === "WALKING"
+                  ? "bg-blue-600 text-white ring-2 duration-500 ring-blue-200"
+                  : "bg-gray-200 text-gray-800"
+              }`}
+            >
+              <FontAwesomeIcon
+                icon={faWalking}
+                className="xl:text-2xl lg:text-lg text-sm"
+              />
+            </button>
+          </div>
           <button
             onClick={handleSearch}
             className="md:mt-4 bg-[#1B31A8] sm:w-1/2 w-full text-white h-fit rounded-full p-4 m-auto"

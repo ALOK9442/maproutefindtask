@@ -1,80 +1,86 @@
-import React from "react";
-import GoogleMapReact from "google-map-react";
+import React, { useEffect, useState } from "react";
+import {
+  GoogleMap,
+  DirectionsService,
+  DirectionsRenderer,
+  Marker,
+} from "@react-google-maps/api";
 
-const Map = ({ origin, destination, waypoints }) => {
-  const defaultCenter = {
-    lat: 28.6139,
-    lng: 77.209,
-  };
-  const defaultZoom = 8;
+const Map = ({
+  origin,
+  destination,
+  waypoints,
+  fetchDirections,
+  resetFetchDirections,
+  setDestinationDisplay,
+  setOriginDisplay,
+  setDistanceDisplay,
+  setRouteNameDisplay,
+  travelMode,
+}) => {
+  const [directions, setDirections] = useState(null);
+  const [mapKey, setMapKey] = useState(0);
 
-  const renderMarkers = () => {
-    const markers = [];
-
-    if (origin) {
-      markers.push(
-        <Marker
-          key="origin"
-          lat={origin.latLng.lat}
-          lng={origin.latLng.lng}
-          text="Origin"
-        />
-      );
+  useEffect(() => {
+    if (fetchDirections) {
+      if (origin && destination) {
+        // Reset directions
+        setDirections(null);
+        setMapKey((prevKey) => prevKey + 1);
+        resetFetchDirections();
+      }
     }
+  }, [fetchDirections, origin, destination, waypoints, resetFetchDirections]);
 
-    if (destination) {
-      markers.push(
-        <Marker
-          key="destination"
-          lat={destination.latLng.lat}
-          lng={destination.latLng.lng}
-          text="Destination"
-        />
-      );
+  const directionsCallback = (response) => {
+    if (response !== null && response.status === "OK") {
+      setOriginDisplay(response.request.origin.query);
+      setDestinationDisplay(response.request.destination.query);
+      setDistanceDisplay(response.routes[0].legs[0].distance.text);
+      setRouteNameDisplay(response.routes[0].summary);
+      setDirections(response);
+      resetFetchDirections();
+    } else {
+      console.error("Directions request failed:", response);
     }
-
-    if (Array.isArray(waypoints)) {
-      waypoints.forEach((waypoint, index) => {
-        markers.push(
-          <Marker
-            key={`waypoint-${index}`}
-            lat={waypoint.latLng.lat}
-            lng={waypoint.latLng.lng}
-            text={`Waypoint ${index + 1}`}
-          />
-        );
-      });
-    }
-
-    return markers;
   };
 
   return (
-    <div style={{ height: "500px", width: "100%" }}>
-      <GoogleMapReact
-        bootstrapURLKeys={{
-          key: "AIzaSyA1Rz_xGPNYMO7WyP1wYdVzVoMOCO_UUtQ",
-          libraries: ["places"],
-          language: "en",
-        }}
-        defaultCenter={defaultCenter}
-        defaultZoom={defaultZoom}
-        options={(maps) => ({
-          mapTypeControlOptions: {
-            mapTypeIds: ["roadmap", "satellite", "terrain"],
-          },
-          zoomControlOptions: {
-            position: maps.ControlPosition.RIGHT_BOTTOM,
-          },
-          streetViewControl: true,
-        })}
+    <div
+      style={{
+        height: "100%",
+        padding: "8px",
+      }}
+    >
+      <GoogleMap
+        mapContainerStyle={{ height: "100%", width: "100%" }}
+        center={{ lat: 28.7041, lng: 77.5025 }}
+        zoom={13}
       >
-        {renderMarkers()}
-      </GoogleMapReact>
+        {origin && destination && fetchDirections && (
+          <DirectionsService
+            options={{
+              origin: origin,
+              destination: destination,
+              waypoints: waypoints.map((location) => ({
+                location,
+                stopover: true,
+              })),
+              travelMode: travelMode,
+            }}
+            callback={directionsCallback}
+          />
+        )}
+        {directions && (
+          <DirectionsRenderer
+            options={{
+              directions: directions,
+            }}
+          />
+        )}
+      </GoogleMap>
     </div>
   );
 };
-
-const Marker = ({ text }) => <div style={{ color: "red" }}>{text}</div>;
 
 export default Map;

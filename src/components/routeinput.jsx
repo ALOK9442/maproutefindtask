@@ -2,8 +2,13 @@ import {
   faBicycle,
   faCab,
   faCircle,
+  faCross,
   faDeleteLeft,
+  faLocation,
+  faLocationDot,
+  faMap,
   faPlus,
+  faTrash,
   faWalking,
 } from "@fortawesome/free-solid-svg-icons";
 import InputBox from "./common/inputbox";
@@ -57,7 +62,7 @@ export default function RouteInput({
       setStopPointInput("");
       stopPointRef.current.value = "";
     } else {
-      toast.error("Please enter a stop first");
+      window.alert("Please enter a valid stop point");
     }
   };
 
@@ -116,7 +121,7 @@ export default function RouteInput({
                   }}
                   className="text-red-500 ml-2"
                 >
-                  <FontAwesomeIcon icon={faDeleteLeft} />
+                  <FontAwesomeIcon icon={faTrash} />
                 </button>
               </li>
             ))}
@@ -130,7 +135,7 @@ export default function RouteInput({
               onPlaceChanged={() =>
                 handleDestinationSelect(destinationRef.current)
               }
-              font={faCircle}
+              font={faLocationDot}
               fontColor="red"
               onChange={() => {}}
             />

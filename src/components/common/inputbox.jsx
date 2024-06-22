@@ -18,7 +18,7 @@ export default function InputBox({
       <label className="block font-mono text-sm ml-3 font-medium text-gray-700">{label}</label>
       <FontAwesomeIcon
         icon={font}
-        className={`text-${fontColor}-500 absolute border-black rounded-full border-2 top-9 left-3`}
+        className={`text-${fontColor}-500 absolute top-9 left-3`}
       />
 
       <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>

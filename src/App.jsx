@@ -14,7 +14,7 @@ export default function App() {
   const [originDisplay, setOriginDisplay] = useState("origin");
   const [destinationDisplay, setDestinationDisplay] = useState("destination");
   const [distanceDisplay, setDistanceDisplay] = useState("NA");
-  const [routeNameDisplay, setRouteNameDisplay] = useState("route");
+  const [routeName, setRouteName] = useState("route");
   const [travelMode, setTravelMode] = useState("DRIVING");
 
   const handleSearch = () => {
@@ -51,7 +51,7 @@ export default function App() {
                   originDisplay={originDisplay}
                   destinationDisplay={destinationDisplay}
                   distanceDisplay={distanceDisplay}
-                  routeNameDisplay={routeNameDisplay}
+                  routeName={routeName}
                   setTravelMode={setTravelMode}
                 />
               </div>
@@ -65,7 +65,7 @@ export default function App() {
                   setDestinationDisplay={setDestinationDisplay}
                   setOriginDisplay={setOriginDisplay}
                   setDistanceDisplay={setDistanceDisplay}
-                  setRouteNameDisplay={setRouteNameDisplay}
+                  setRouteName={setRouteName}
                   travelMode={travelMode}
                 />
               </div>

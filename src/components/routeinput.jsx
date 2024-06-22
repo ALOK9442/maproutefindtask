@@ -26,7 +26,7 @@ export default function RouteInput({
   originDisplay,
   destinationDisplay,
   distanceDisplay,
-  routeNameDisplay,
+  routeName,
 }) {
   const [stopPointInput, setStopPointInput] = useState("");
   const [selectedMode, setSelectedMode] = useState("DRIVING");
@@ -196,7 +196,7 @@ export default function RouteInput({
         originDisplay={originDisplay}
         destinationDisplay={destinationDisplay}
         distanceDisplay={distanceDisplay}
-        routeNameDisplay={routeNameDisplay}
+        routeName={routeName}
       />
     </div>
   );

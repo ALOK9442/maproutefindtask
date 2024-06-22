@@ -15,7 +15,7 @@ const Map = ({
   setDestinationDisplay,
   setOriginDisplay,
   setDistanceDisplay,
-  setRouteNameDisplay,
+  setRouteName,
   travelMode,
 }) => {
   const [directions, setDirections] = useState(null);
@@ -37,7 +37,7 @@ const Map = ({
       setOriginDisplay(response.request.origin.query);
       setDestinationDisplay(response.request.destination.query);
       setDistanceDisplay(response.routes[0].legs[0].distance.text);
-      setRouteNameDisplay(response.routes[0].summary);
+      setRouteName(response.routes[0].summary);
       setDirections(response);
       resetFetchDirections();
     } else {

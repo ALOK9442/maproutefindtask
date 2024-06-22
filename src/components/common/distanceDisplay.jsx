@@ -7,7 +7,7 @@ export default function DistanceDisplay({
   console.log(routeName);
   return (
     <div className="w-full border border-gray-500">
-      <div className=" flex justify-between w-full md:text-2xl text-base items-center font-extrabold px-2 py-3 md:px-3 md:py-6 bg-white h-1/2">
+      <div className=" flex justify-between w-full md:text-2xl items-center font-extrabold px-3 py-2  bg-white h-1/2">
         <span>Distance: {routeName}</span>
         <span className=" text-[#0079FF] text-base md:text-2xl">
           {distanceDisplay}

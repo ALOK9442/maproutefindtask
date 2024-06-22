@@ -142,13 +142,13 @@ export default function RouteInput({
             />
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center mt-1 md:w-1/2">
-          <div className="md:w-2/3 w-full border-2 space-x-1 bg-white p-2 shadow-xl rounded-xl h-fit flex justify-around mb-4">
+        <div className="flex flex-col justify-center items-center sm:m-auto my-4 w-full ">
+          <div className="sm:ml-12 w-full border-2 space-x-1 bg-white p-2 shadow-xl rounded-md h-fit flex justify-around mb-4">
             <button
               onClick={() => handleModeChange("DRIVING")}
               className={`flex h-fit items-center md:px-3 p-2 md:py-3 rounded-full ${
                 selectedMode === "DRIVING"
-                  ? "bg-blue-600 text-white ring-2 duration-500 ring-blue-200"
+                  ? "bg-blue-600 duration-300 text-white"
                   : "bg-gray-200 text-gray-800"
               }`}
             >
@@ -161,7 +161,7 @@ export default function RouteInput({
               onClick={() => handleModeChange("TWO_WHEELER")}
               className={`flex h-fit items-center md:px-3 p-2 md:py-3 rounded-full ${
                 selectedMode === "TWO_WHEELER"
-                  ? "bg-blue-600 text-white ring-2 duration-500 ring-blue-200"
+                  ? "bg-blue-600 duration-300 text-white "
                   : "bg-gray-200 text-gray-800"
               }`}
             >
@@ -174,7 +174,7 @@ export default function RouteInput({
               onClick={() => handleModeChange("WALKING")}
               className={`flex h-fit items-center md:px-3 p-2 md:py-3 rounded-full ${
                 selectedMode === "WALKING"
-                  ? "bg-blue-600 text-white ring-2 duration-500 ring-blue-200"
+                  ? "bg-blue-600 duration-300 text-white duration-500 "
                   : "bg-gray-200 text-gray-800"
               }`}
             >
